@@ -1,40 +1,73 @@
 import type { IsStringLiteral } from '../../internal/literals.js'
 
-type UpperChars =
-  | 'A'
-  | 'B'
-  | 'C'
-  | 'D'
-  | 'E'
-  | 'F'
-  | 'G'
-  | 'H'
-  | 'I'
-  | 'J'
-  | 'K'
-  | 'L'
-  | 'M'
-  | 'N'
-  | 'O'
-  | 'P'
-  | 'Q'
-  | 'R'
-  | 'S'
-  | 'T'
-  | 'U'
-  | 'V'
-  | 'W'
-  | 'X'
-  | 'Y'
-  | 'Z'
-type LowerChars = Lowercase<UpperChars>
+export type UpperLetters = [
+    'A'
+  , 'B'
+  , 'C'
+  , 'D'
+  , 'E'
+  , 'F'
+  , 'G'
+  , 'H'
+  , 'I'
+  , 'J'
+  , 'K'
+  , 'L'
+  , 'M'
+  , 'N'
+  , 'O'
+  , 'P'
+  , 'Q'
+  , 'R'
+  , 'S'
+  , 'T'
+  , 'U'
+  , 'V'
+  , 'W'
+  , 'X'
+  , 'Y'
+  , 'Z'
+]
+export type UpperLetter = UpperLetters[number]
+export type LowerLetters = [
+    'a'
+  , 'b'
+  , 'c'
+  , 'd'
+  , 'e'
+  , 'f'
+  , 'g'
+  , 'h'
+  , 'i'
+  , 'j'
+  , 'k'
+  , 'l'
+  , 'm'
+  , 'n'
+  , 'o'
+  , 'p'
+  , 'q'
+  , 'r'
+  , 's'
+  , 't'
+  , 'u'
+  , 'v'
+  , 'w'
+  , 'x'
+  , 'y'
+  , 'z'
+]
+export type LowerLetter = LowerLetters[number]
+
+export type Letters = [...LowerLetters, ...UpperLetters]
+export type Letter = LowerLetter | UpperLetter
 
 // UTILITIES FOR DETECTING CHARS
 /**
  * Checks if the given character is an upper case letter.
  */
 export type IsUpper<T extends string> = IsStringLiteral<T> extends true
-  ? T extends UpperChars
+  ? T extends UpperLetter
     ? true
     : false
   : boolean
@@ -43,7 +76,7 @@ export type IsUpper<T extends string> = IsStringLiteral<T> extends true
  * Checks if the given character is a lower case letter.
  */
 export type IsLower<T extends string> = IsStringLiteral<T> extends true
-  ? T extends LowerChars
+  ? T extends LowerLetter
     ? true
     : false
   : boolean
@@ -52,7 +85,7 @@ export type IsLower<T extends string> = IsStringLiteral<T> extends true
  * Checks if the given character is a letter.
  */
 export type IsLetter<T extends string> = IsStringLiteral<T> extends true
-  ? T extends LowerChars | UpperChars
+  ? T extends Letter
     ? true
     : false
   : boolean

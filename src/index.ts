@@ -46,10 +46,10 @@ export type { Words } from './utils/words.js'
 export { words } from './utils/words.js'
 
 // Characters
-export type { IsLetter, IsLower, IsUpper } from './utils/characters/letters.js'
-export type { IsDigit } from './utils/characters/numbers.js'
+export type { IsLetter, IsLower, IsUpper, LowerLetter, LowerLetters, UpperLetter, UpperLetters, Letter, Letters } from './utils/characters/letters.js'
+export type { IsDigit, Digit, Digits } from './utils/characters/numbers.js'
 export type { IsSpecial } from './utils/characters/special.js'
-export type { IsSeparator } from './utils/characters/separators.js'
+export type { IsSeparator, Separator, Separators } from './utils/characters/separators.js'
 
 // Word casing
 export type { CamelCase } from './utils/word-case/camel-case.js'

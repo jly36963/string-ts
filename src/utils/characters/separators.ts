@@ -26,7 +26,8 @@ export const SEPARATOR_REGEX = new RegExp(
   'g'
 )
 
-export type Separator = (typeof SEPARATORS)[number]
+export type Separators = typeof SEPARATORS
+export type Separator = Separators[number]
 
 /**
  * Checks if the given character is a separator.

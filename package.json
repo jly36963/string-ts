@@ -29,7 +29,9 @@
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
-      "native": ["dist/native.d.ts"]
+      "native": [
+        "dist/native.d.ts"
+      ]
     }
   },
   "devDependencies": {
@@ -41,7 +43,10 @@
     "typescript": "^5.7.3",
     "vitest": "latest"
   },
-  "files": ["README.md", "./dist/*"],
+  "files": [
+    "README.md",
+    "./dist/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gustavoguichard/string-ts.git"
@@ -51,6 +56,10 @@
   },
   "sideEffects": false,
   "pnpm": {
-    "onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
-  }
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild"
+    ]
+  },
+  "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"
 }

@@ -104,6 +104,34 @@ We have tested it with build tools like Webpack, Vite, Rollup, etc.
 
 It also only work with common ASCII characters characters. We don't plan to support international characters or emojis.
 
+## 🪄 Native String Method Overrides
+
+Extracting functions from `string-ts` is the recommended usage, but if you'd like to apply strongly-typed versions of native string methods project-wide, you can do so with a single import.
+
+Inspired by [ts-reset](https://github.com/total-typescript/ts-reset), this import overrides the native `String.prototype` type declarations, giving you strong typing for supported methods like `charAt`, `startsWith`, `endsWith`, `replace`, `split`, and more.
+
+```ts
+import 'string-ts/native'
+
+const str = 'hello-world' as const
+
+str.replace('-', '_')
+//  ^? 'hello_world'
+
+str.charAt(6)
+//  ^? 'w'
+
+str.startsWith('hello')
+//  ^? true
+
+str.split('-')
+//  ^? ['hello', 'world']
+```
+
+This has minimal impact on type-checker performance. In our tests, TSC went from 17.21s to 17.41s.
+
+_Note: Only methods already supported by the library are typed. The `length` property cannot be strongly-typed as it's a read-only property, not a method._
+
 ---
 
 # 📖 API

@@ -102,7 +102,7 @@ We have tested it with build tools like Webpack, Vite, Rollup, etc.
 
 `string-ts` currently only works on TypeScript v5+.
 
-It also only work with common ASCII characters characters. We don't plan to support international characters or emojis.
+See also: [Known limitations](#known-limitations).
 
 ## 🪄 Native String Method Overrides
 
@@ -319,6 +319,8 @@ const result = padStart(str, 10, '=')
 ### repeat
 
 This function is a strongly-typed counterpart of `String.prototype.repeat`.
+
+_Note: for counts above 45 the return type falls back to `string` to avoid TypeScript's type-instantiation depth limit. See [Known limitations](#known-limitations)._
 
 ```ts
 import { repeat } from 'string-ts'
@@ -971,6 +973,24 @@ type MyType<T> = { [K in keyof T as Uppercase<K>]: T[K] }
 const result = deepTransformKeys(data, toUpperCase) as MyType<typeof data>
 //    ^ { 'HELLOWORLD': 'baz' }
 ```
+
+## Known limitations
+
+### ASCII only
+
+`string-ts` only works with common ASCII characters. We don't plan to support international characters or emojis.
+
+### Type-level recursion depth
+
+TypeScript has an internal limit on how deeply it can evaluate recursive types. Some `string-ts` types rely on recursion, so very large inputs will cause the type to fall back to `string` (or a template literal like `` `${string}hello` ``) instead of computing the exact literal.
+
+| Function / Type | Exact-literal limit | Behaviour beyond limit |
+|---|---|---|
+| `repeat` / `Repeat` | count ≤ 45 | Returns `string` |
+| `padStart` / `PadStart` | padding ≤ 45 chars | Returns `` `${string}<original>` `` |
+| `padEnd` / `PadEnd` | padding ≤ 45 chars | Returns `` `<original>${string}` `` |
+
+Runtime behaviour is unaffected — only the inferred type widens.
 
 ## 🎙️ Interview
 

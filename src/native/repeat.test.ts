@@ -6,6 +6,13 @@ namespace TypeTests {
   type test3 = Expect<Equal<Repeat<Uppercase<string>, 3>, string>>
   type test4 = Expect<Equal<Repeat<' ', number>, string>>
   type test5 = Expect<Equal<Repeat<'a' | 'b', 2>, 'aa' | 'bb'>>
+  type test6 = Expect<Equal<Repeat<'═', 80>, string>>
+  type test7 = Expect<Equal<Repeat<'a', 100>, string>>
+  type test8 = Expect<Equal<Repeat<'a', 10>, 'aaaaaaaaaa'>>
+  type test9 = Expect<
+    Equal<Repeat<'a', 45>, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'>
+  >
+  type test10 = Expect<Equal<Repeat<'a', 46>, string>>
 }
 
 describe('repeat', () => {
@@ -34,5 +41,11 @@ describe('repeat', () => {
     const result = repeat(data, 2)
     expect(['aa', 'bb']).toContain(result)
     type test = Expect<Equal<typeof result, 'aa' | 'bb'>>
+  })
+
+  test('should fall back to string type for large repeat counts', () => {
+    const result = repeat('═', 80)
+    expect(result).toEqual('═'.repeat(80))
+    type test = Expect<Equal<typeof result, string>>
   })
 })

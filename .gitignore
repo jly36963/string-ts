@@ -5,3 +5,4 @@ dist/
 npm
 tsc/
 .DS_Store
+*.local.*
